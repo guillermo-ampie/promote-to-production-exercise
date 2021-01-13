@@ -13,24 +13,24 @@ Parameters:
 
 Resources:
 
-WebsiteBucket:
-  Type: AWS::S3::Bucket
-  Properties:
-    BucketName: !Sub "${BUCKETNAME}"
-    AccessControl: PublicRead
-    WebsiteConfiguration:
-      IndexDocument: index.html
-      ErrorDocument: 404.html
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${BUCKETNAME}"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
 
-WebsiteBucketPolicy:
-  Type: AWS::S3::BucketPolicy
-  Properties:
-    Bucket: !Ref 'WebsiteBucket'
-    PolicyDocument:
-      Statement:
-      - Sid: PublicReadForGetBucketObjects
-        Effect: Allow
-        Principal: '*'
-        Action: s3:GetObject
-        Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref 'WebsiteBucket'
+      PolicyDocument:
+        Statement:
+        - Sid: PublicReadForGetBucketObjects
+          Effect: Allow
+          Principal: '*'
+          Action: s3:GetObject
+          Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
 
