@@ -6,7 +6,7 @@ Description: >
 
 
 Parameters:
-  BUCKET_NAME:
+  BUCKETNAME:
     Description: The name of the bucket
     Type: String
 
@@ -16,7 +16,7 @@ Resources:
 WebsiteBucket:
   Type: AWS::S3::Bucket
   Properties:
-    BucketName: !Sub "${BUCKET_NAME}"
+    BucketName: !Sub "${BUCKETNAME}"
     AccessControl: PublicRead
     WebsiteConfiguration:
       IndexDocument: index.html
