@@ -13,6 +13,7 @@ jobs:
     steps:
       - checkout
       - run: |
+          echo "Create and deploy front end"
       #     echo "${CIRCLE_WORKFLOW_ID}"
       #     aws cloudformation deploy \
       #       --template-file bucket.yml \
