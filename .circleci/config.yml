@@ -37,7 +37,7 @@ jobs:
       - checkout
       - run: |
           export TERM=ansi
-          yum -y install tar
+          yum -y install tar gzip
           mkdir ~/project/tmp
           aws cloudformation \
           list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
