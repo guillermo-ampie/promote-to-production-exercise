@@ -30,13 +30,26 @@ jobs:
             --stack-name production-distro \
             --parameter-overrides PipelineID="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
 
+  get_last_deployment_id:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: |
+          aws cloudformation \
+          list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
+          --no-paginate --output text
 
 workflows:
   default:
     jobs:
       - create_and_deploy_front_end
+      - get_last_deployment_id:
+          requires:
+            - create_and_deploy_front_end
       - promote_to_production:
           requires:
             - create_and_deploy_front_end
+
 
     
