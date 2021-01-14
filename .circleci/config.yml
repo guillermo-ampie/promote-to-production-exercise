@@ -13,12 +13,12 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo "${CIRCLE_WORKFLOW_ID}"
-          aws cloudformation deploy \
-            --template-file bucket.yml \
-            --stack-name "stack-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --parameter-overrides BUCKETNAME="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
-      - run: aws s3 sync . s3://"bucket-${CIRCLE_WORKFLOW_ID:0:7}" --delete
+      #     echo "${CIRCLE_WORKFLOW_ID}"
+      #     aws cloudformation deploy \
+      #       --template-file bucket.yml \
+      #       --stack-name "stack-${CIRCLE_WORKFLOW_ID:0:7}" \
+      #       --parameter-overrides BUCKETNAME="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
+      # - run: aws s3 sync . s3://"bucket-${CIRCLE_WORKFLOW_ID:0:7}" --delete
 
   promote_to_production:
     docker:
@@ -26,10 +26,10 @@ jobs:
     steps:
       - checkout
       - run: |
-          aws cloudformation deploy \
-            --template-file cloudfront.yml \
-            --stack-name production-distro \
-            --parameter-overrides PipelineID="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
+          # aws cloudformation deploy \
+          #   --template-file cloudfront.yml \
+          #   --stack-name production-distro \
+          #   --parameter-overrides PipelineID="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
 
   get_last_deployment_id:
     docker:
@@ -40,9 +40,10 @@ jobs:
           export TERM=ansi
           yum -y install tar gzip
           mkdir ~/project/tmp
-          aws cloudformation \
-          list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-          --no-paginate --output text > ~/project/tmp/pipeline_id.txt
+          # aws cloudformation \
+          # list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
+          # --no-paginate --output text > ~/project/tmp/pipeline_id.txt
+          echo "HOLA"> ~/project/tmp/pipeline_id.txt
           cat ~/project/tmp/pipeline_id.txt
       - persist_to_workspace:
           root: ~/project/tmp
