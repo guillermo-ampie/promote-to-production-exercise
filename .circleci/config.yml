@@ -43,6 +43,7 @@ jobs:
           aws cloudformation \
           list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
           --no-paginate --output text > ~/project/tmp/pipeline_id.txt
+          cat ~/project/tmp/pipeline_id.txt
       - persist_to_workspace:
           root: ~/project/tmp
           paths:
