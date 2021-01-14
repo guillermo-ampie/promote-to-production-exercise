@@ -57,9 +57,9 @@ jobs:
       - run: |
           export TERM=ansi
           yum -y install tar gzip
-          cat ~/project/tmp/pipeline_id.txt 
       - attach_workspace:
           at: ~/project/tmp
+      - run: cat ~/project/tmp/pipeline_id.txt 
 
 workflows:
   default:
