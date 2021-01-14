@@ -1,0 +1,2 @@
+aws cloudformation deploy --template-file bucket.yml --stack-name "stack-AAA"  --parameter-override BUCKETNAME="bucket-AAA"
+      

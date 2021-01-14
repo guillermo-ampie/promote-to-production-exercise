@@ -41,10 +41,9 @@ jobs:
           export TERM=ansi
           yum -y install tar gzip
           mkdir ~/project/tmp
-          # aws cloudformation \
-          # list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-          # --no-paginate --output text > ~/project/tmp/pipeline_id.txt
-          echo "HOLA"> ~/project/tmp/pipeline_id.txt
+          aws cloudformation \
+          list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
+          --no-paginate --output text > ~/project/tmp/pipeline_id.txt
           cat ~/project/tmp/pipeline_id.txt
       - persist_to_workspace:
           root: ~/project/tmp
