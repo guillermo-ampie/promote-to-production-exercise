@@ -48,7 +48,6 @@ jobs:
           paths:
             - pipeline_id.txt
 
-
   clean_up_old_front_end:
     docker:
       - image: amazon/aws-cli
@@ -59,7 +58,10 @@ jobs:
           yum -y install tar gzip
       - attach_workspace:
           at: ~/project/tmp
-      - run: cat ~/project/tmp/pipeline_id.txt 
+      - run: |
+          export PIPELINE_ID=$(cat ~/project/tmp/pipeline_id.txt)
+          aws s3 rm "s3://${PIPELINE_ID}" --recursive
+          aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
 
 workflows:
   default:
