@@ -1,6 +1,6 @@
 #!/bin/sh
 
-S3_BUCKET_NAME="A000001"
+S3_BUCKET_NAME="a000001"
 STACK_FILE="cloudfront.yml"
 STACK_NAME="production-distro"
 TAGS="project=udapeople"
@@ -8,7 +8,7 @@ TAGS="project=udapeople"
 
 echo "Building first deployment..."
 
-echo "Creating bucket"
+echo "Creating bucket: ${S3_BUCKET_NAME}..."
 aws cloudformation deploy \
     --template-file bucket.yml \
     --stack-name "stack-${S3_BUCKET_NAME}" \
