@@ -16,4 +16,4 @@ with automatic promotion of green environment and clean-up of blue environment
 
 2.- Update the code: for example, change the version in file index.html
 
-3.- Connect to to the CloudFormation endpoint
+3.- Connect to to the CloudFront endpoint
