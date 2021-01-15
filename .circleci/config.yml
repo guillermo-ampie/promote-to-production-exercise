@@ -13,13 +13,11 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo "Create and deploy Frontend"
-          echo "${CIRCLE_WORKFLOW_ID}"
           aws cloudformation deploy \
             --template-file bucket.yml \
             --stack-name "stack-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --parameter-overrides BUCKETNAME="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
-      - run: aws s3 sync . s3://"bucket-${CIRCLE_WORKFLOW_ID:0:7}" --delete
+            --parameter-overrides BUCKETNAME="${CIRCLE_WORKFLOW_ID:0:7}"
+      - run: aws s3 sync . s3://"${CIRCLE_WORKFLOW_ID:0:7}" --delete
 
   promote_to_production:
     docker:
@@ -30,7 +28,7 @@ jobs:
           aws cloudformation deploy \
             --template-file cloudfront.yml \
             --stack-name production-distro \
-            --parameter-overrides PipelineID="bucket-${CIRCLE_WORKFLOW_ID:0:7}"
+            --parameter-overrides PipelineID="${CIRCLE_WORKFLOW_ID:0:7}"
 
   get_last_deployment_id:
     docker:
