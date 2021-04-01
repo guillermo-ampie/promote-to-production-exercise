@@ -1,7 +1,6 @@
 Description: >
   Project: Udacity Cloud DevOps Nanodegree exercise: 
   Promote to Production, Lesson 4: 27, 28 and 29 
-  Author: Udacity team
   This CloudFormation template creates a S3 bucket
 
 
