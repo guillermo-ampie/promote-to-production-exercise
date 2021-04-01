@@ -11,8 +11,8 @@ with automatic promotion of green environment and clean-up of blue environment
 
 ## Usage
 
-1.- Execute build-first-deployment.sh
+1.- Run: `build-first-deployment.sh`
 
-2.- Update the code: for example, change the version in file index.html
+2.- Update the code: for example, change the version in file [index.html](./index.html)
 
-3.- Connect to the CloudFront endpoint
+3.- Open the CloudFront endpoint in your browser

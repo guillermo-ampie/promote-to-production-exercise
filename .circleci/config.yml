@@ -1,0 +1,82 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+
+# orbs:
+#   # Declare a dependency on the welcome-orb
+#   welcome: circleci/welcome-orb@0.4.1
+  
+jobs:
+  create_and_deploy_front_end:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: |
+          aws cloudformation deploy \
+            --template-file bucket.yml \
+            --stack-name "stack-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --parameter-overrides BUCKETNAME="${CIRCLE_WORKFLOW_ID:0:7}"
+      - run: aws s3 sync . s3://"${CIRCLE_WORKFLOW_ID:0:7}" --delete
+
+  promote_to_production:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: |
+          aws cloudformation deploy \
+            --template-file cloudfront.yml \
+            --stack-name production-distro \
+            --parameter-overrides PipelineID="${CIRCLE_WORKFLOW_ID:0:7}"
+
+  get_last_deployment_id:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: |
+          export TERM=ansi
+          yum -y install tar gzip
+          mkdir ~/project/tmp
+          aws cloudformation \
+          list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
+          --no-paginate --output text > ~/project/tmp/pipeline_id.txt
+          cat ~/project/tmp/pipeline_id.txt
+      - persist_to_workspace:
+          root: ~/project/tmp
+          paths:
+            - pipeline_id.txt
+
+  clean_up_old_front_end:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: |
+          export TERM=ansi
+          yum -y install tar gzip
+      - attach_workspace:
+          at: ~/project/tmp
+      - run: |
+          export TERM=ansi
+          export PIPELINE_ID=$(cat ~/project/tmp/pipeline_id.txt)
+          aws s3 rm "s3://${PIPELINE_ID}" --recursive
+          aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
+
+workflows:
+  default:
+    jobs:
+      - create_and_deploy_front_end
+      - get_last_deployment_id:
+          requires:
+            - create_and_deploy_front_end
+      - promote_to_production:
+          requires:
+            - get_last_deployment_id
+      - clean_up_old_front_end:
+          requires:
+            - promote_to_production
+
+
+    
