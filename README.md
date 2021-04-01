@@ -7,7 +7,6 @@ Exercise from  in Udacity's [CloudDevOps Engineer Nanodegree](https://www.udacit
 ## Description
 
 A static web site (using a S3 bucket) is updated using a Blue/Green deployment strategy using CircleCI
-
 with automatic promotion of green environment and clean-up of blue environment
 
 ## Usage
@@ -16,4 +15,4 @@ with automatic promotion of green environment and clean-up of blue environment
 
 2.- Update the code: for example, change the version in file index.html
 
-3.- Connect to to the CloudFront endpoint
+3.- Connect to the CloudFront endpoint
