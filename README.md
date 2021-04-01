@@ -13,7 +13,7 @@ with automatic promotion of the green environment and clean-up of the blue envir
 
 ## Usage
 
-1.- Run: `build-first-deployment.sh`, this creates an Amazon S3 bucket and a [CloudFront](https://aws.amazon.com/cloudfront/) Distribution:
+1.- Run: `build_first_deployment.sh`, this creates an Amazon S3 bucket and a [CloudFront](https://aws.amazon.com/cloudfront/) Distribution:
 
 * The AWS S3 bucket is configured for static web browsing
 * The CloudFront Distribution represents your "router" in the deployment
