@@ -1,5 +1,7 @@
 # promote-to-production-exercise
 
+[![Guillermo Ampie](https://circleci.com/gh/guillermo-ampie/promote-to-production-exercise.svg?style=shield)](https://github.com/guillermo-ampie/promote-to-production-exercise)
+
 A sample Blue/Green deployment exercise using AWS CloudFormation with CircleCI
 
 Exercise from  in Udacity's [CloudDevOps Engineer Nanodegree](https://www.udacity.com/course/cloud-dev-ops-nanodegree--nd9991)
