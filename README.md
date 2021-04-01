@@ -26,4 +26,4 @@ with automatic promotion of the green environment and clean-up of the blue envir
 
 4.- Refresh your browser tab, you must see the "new" web site
 
-5.- Clean up resources!
+5.- To delete all resources, run: `cleanup_resources.sh`
