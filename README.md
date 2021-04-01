@@ -2,7 +2,7 @@
 
 [![Guillermo Ampie](https://circleci.com/gh/guillermo-ampie/promote-to-production-exercise.svg?style=shield)](https://github.com/guillermo-ampie/promote-to-production-exercise)
 
-A sample [Blue/Green deployment](https://en.wikipedia.org/wiki/Blue-green_deployment) exercise using [AWS CloudFormation](https://aws.amazon.com/cloudformation/) with [CircleCI](https://www.circleci.com/)
+A sample [Blue/Green deployment](https://en.wikipedia.org/wiki/Blue-green_deployment) deployment using [AWS CloudFormation](https://aws.amazon.com/cloudformation/) with [CircleCI](https://www.circleci.com/)
 
 Exercise from Udacity's [Cloud DevOps Engineer Nanodegree](https://www.udacity.com/course/cloud-dev-ops-nanodegree--nd9991)
 
