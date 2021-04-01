@@ -8,8 +8,7 @@ Exercise from Udacity's [Cloud DevOps Engineer Nanodegree](https://www.udacity.c
 
 ## Description
 
-A static web site (using an [Amazon S3](https://aws.amazon.com/s3/) bucket) is updated using a Blue/Green deployment strategy using CircleCI
-with automatic promotion of the green environment and clean-up of the blue environment.
+A static website (using an [Amazon S3](https://aws.amazon.com/s3/) bucket) is updated using a Blue/Green deployment strategy using CircleCI to promote the green environment and clean-up of the blue environment automatically. 
 
 ## Usage
 
