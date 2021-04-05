@@ -13,7 +13,15 @@ commands:
             export TERM=ansi
             aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
 
-  
+  destroy_environment:
+    steps:
+      - run:
+          name: Rollback
+          command: |
+            delete_environment
+          when: on_fail
+
+          
 jobs:
   create_and_deploy_frontend:
     docker:
