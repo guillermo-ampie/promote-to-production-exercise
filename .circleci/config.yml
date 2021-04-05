@@ -1,5 +1,19 @@
 version: 2.1
   
+
+commands:
+  delete_environment: 
+    steps:
+      - run: 
+          name:  "Delete frontend environment"
+          command: |
+            export PIPELINE_ID=$(cat ~/project/tmp/pipeline_id.txt)
+            echo "Deleting stack: stack-${PIPELINE_ID}"
+            # export TERM=ansi
+            aws s3 rm "s3://${PIPELINE_ID}" --recursive
+            aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
+
+  
 jobs:
   create_and_deploy_frontend:
     docker:
@@ -48,16 +62,13 @@ jobs:
     steps:
       - checkout
       - run: |
-          export TERM=ansi
+          # export TERM=ansi
           yum -y install tar gzip
       - attach_workspace:
           at: ~/project/tmp
-      - run: |
-          export TERM=ansi
-          export PIPELINE_ID=$(cat ~/project/tmp/pipeline_id.txt)
-          aws s3 rm "s3://${PIPELINE_ID}" --recursive
-          aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
-
+      - delete_environment
+ 
+      
 workflows:
   default:
     jobs:
