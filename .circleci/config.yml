@@ -43,13 +43,13 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - attach_workspace:
-          at: ~/project/tmp      
       - run:
           name: Install dependencies
           command: |
             export TERM=ansi
             yum -y install tar curl
+      - attach_workspace:
+          at: ~/project/tmp
       - run: |
           curl "FAILED_URL"
       - destroy_environment
