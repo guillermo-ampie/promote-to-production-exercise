@@ -95,9 +95,12 @@ workflows:
   default:
     jobs:
       - create_and_deploy_frontend
-      - get_last_deployment_id:
+      - smoke_tests:
           requires:
             - create_and_deploy_frontend
+      - get_last_deployment_id:
+          requires:
+            - smoke_tests
       - promote_to_production:
           requires:
             - get_last_deployment_id
