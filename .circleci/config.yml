@@ -43,6 +43,8 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
+      - attach_workspace:
+          at: ~/project/tmp      
       - run:
           name: Install dependencies
           command: |
@@ -100,12 +102,12 @@ workflows:
   default:
     jobs:
       - create_and_deploy_frontend
+      - get_last_deployment_id:
+          requires:
+            - create_and_deploy_frontend
       - smoke_tests:
           requires:
             - create_and_deploy_frontend
-      - get_last_deployment_id:
-          requires:
-            - smoke_tests
       - promote_to_production:
           requires:
             - get_last_deployment_id
