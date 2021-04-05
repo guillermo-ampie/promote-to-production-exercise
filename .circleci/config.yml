@@ -16,9 +16,13 @@ commands:
   destroy_environment:
     steps:
       - run:
-          name: Rollback
+          name: "Rollback - deleting frontend environment"
           command: |
-            delete_environment
+            export PIPELINE_ID=$(< ~/project/tmp/pipeline_id.txt)
+            echo "Deleting stack: stack-${PIPELINE_ID}"
+            aws s3 rm "s3://${PIPELINE_ID}" --recursive
+            export TERM=ansi
+            aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
           when: on_fail
 
 
