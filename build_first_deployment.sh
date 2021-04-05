@@ -1,9 +1,9 @@
 #!/bin/sh
 
-S3_BUCKET_NAME="bucket-sample-00001"
-STACK_FILE="cloudfront.yml"
-STACK_NAME="production-distro"
-TAGS="project=udapeople"
+S3_BUCKET_NAME="sample-AA0001"
+CLOUDFRONT_STACK_FILE="cloudfront.yml"
+CLOUDFRONT_STACK_NAME="cloudfront-dist"
+TAGS="promote=blue-green"
 
 echo "Building first deployment..."
 
@@ -13,12 +13,14 @@ aws cloudformation deploy \
     --stack-name "stack-${S3_BUCKET_NAME}" \
     --parameter-overrides BUCKETNAME="${S3_BUCKET_NAME}"
 
+echo
 echo "Syncing files to bucket: ${S3_BUCKET_NAME}..."
-aws s3 sync . s3://"${S3_BUCKET_NAME}" --delete
+aws s3 sync . s3://"${S3_BUCKET_NAME}" --delete --exclude ".*"
 
-echo "Deploying stack: ${STACK_NAME}..."
+echo
+echo "Deploying stack: ${CLOUDFRONT_STACK_NAME}..."
 aws cloudformation deploy \
-    --template-file ${STACK_FILE} \
-    --stack-name ${STACK_NAME} \
+    --template-file ${CLOUDFRONT_STACK_FILE} \
+    --stack-name ${CLOUDFRONT_STACK_NAME} \
     --parameter-overrides PipelineID=${S3_BUCKET_NAME} \
     --tags ${TAGS}
