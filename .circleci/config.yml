@@ -19,6 +19,7 @@ commands:
           name: "Rollback - deleting frontend environment"
           command: |
             aws s3 rm "s3://${CIRCLE_WORKFLOW_ID:0:7}" --recursive
+            export TERM=ansi
             aws cloudformation delete-stack --stack-name "stack-${CIRCLE_WORKFLOW_ID:0:7}" 
           when: on_fail
 
