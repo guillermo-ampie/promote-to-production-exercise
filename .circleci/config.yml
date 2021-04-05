@@ -107,10 +107,10 @@ workflows:
             - create_and_deploy_frontend
       - smoke_tests:
           requires:
-            - create_and_deploy_frontend
+            - get_last_deployment_id
       - promote_to_production:
           requires:
-            - get_last_deployment_id
+            - smoke_tests
       - cleanup_old_frontend:
           requires:
             - promote_to_production
