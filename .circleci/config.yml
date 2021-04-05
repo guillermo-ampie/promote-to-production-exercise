@@ -9,8 +9,8 @@ commands:
           command: |
             export PIPELINE_ID=$(< ~/project/tmp/pipeline_id.txt)
             echo "Deleting stack: stack-${PIPELINE_ID}"
-            # export TERM=ansi
             aws s3 rm "s3://${PIPELINE_ID}" --recursive
+            export TERM=ansi
             aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
 
   
@@ -64,7 +64,6 @@ jobs:
     steps:
       - checkout
       - run: |
-          # export TERM=ansi
           yum -y install tar gzip
       - attach_workspace:
           at: ~/project/tmp
