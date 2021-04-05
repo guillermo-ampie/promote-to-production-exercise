@@ -18,11 +18,7 @@ commands:
       - run:
           name: "Rollback - deleting frontend environment"
           command: |
-            export PIPELINE_ID=$(< ~/project/tmp/pipeline_id.txt)
-            echo "Deleting stack: stack-${PIPELINE_ID}"
-            aws s3 rm "s3://${PIPELINE_ID}" --recursive
-            export TERM=ansi
-            aws cloudformation delete-stack --stack-name "stack-${PIPELINE_ID}" 
+            aws cloudformation delete-stack --stack-name "stack-${CIRCLE_WORKFLOW_ID:0:7}" 
           when: on_fail
 
 
@@ -43,15 +39,9 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - run:
-          name: Install dependencies
-          command: |
-            export TERM=ansi
-            yum -y install tar gzip curl
-      - attach_workspace:
-          at: ~/project/tmp
       - run: |
-          curl "FAILED_URL"
+          # curl "FAILED_URL"
+          curl http://${CIRCLE_WORKFLOW_ID:0:7}.s3-website-${AWS_DEFAULT_REGION}.amazonaws.com
       - destroy_environment
           
   get_last_deployment_id:
