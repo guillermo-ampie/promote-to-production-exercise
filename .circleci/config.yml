@@ -47,7 +47,7 @@ jobs:
           name: Install dependencies
           command: |
             export TERM=ansi
-            yum -y install tar curl
+            yum -y install tar gzip curl
       - attach_workspace:
           at: ~/project/tmp
       - run: |
