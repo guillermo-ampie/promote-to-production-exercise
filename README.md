@@ -8,9 +8,19 @@ Exercise from Udacity's [Cloud DevOps Engineer Nanodegree](https://www.udacity.c
 
 ## Description
 
-A static website (using an [Amazon S3](https://aws.amazon.com/s3/) bucket) is updated using a Blue/Green deployment strategy using CircleCI to promote the green environment and clean-up of the blue environment automatically. 
+A static website (using an [Amazon S3](https://aws.amazon.com/s3/) bucket) is updated using a Blue/Green deployment strategy using CircleCI to promote the green environment and clean-up of the blue environment automatically.
 
 ## Usage
+
+### CircleCI Environment Variables
+
+You need to setup the following CircleCI environment variables in order to [configure the AWS CLI](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) under CircleCI:
+
+* AWS_ACCESS_KEY_ID
+* AWS_SECRET_ACCESS_KEY
+* AWS_DEFAULT_REGION
+
+## Steps
 
 1.- Run: `build_first_deployment.sh`, this creates an Amazon S3 bucket and a [CloudFront](https://aws.amazon.com/cloudfront/) Distribution:
 
