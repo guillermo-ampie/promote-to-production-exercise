@@ -1,7 +1,7 @@
 version: 2.1
   
 jobs:
-  create_and_deploy_front_end:
+  create_and_deploy_frontend:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -42,7 +42,7 @@ jobs:
             --stack-name production-distro \
             --parameter-overrides PipelineID="${CIRCLE_WORKFLOW_ID:0:7}"
 
-  clean_up_old_front_end:
+  clean_up_old_frontend:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -61,14 +61,14 @@ jobs:
 workflows:
   default:
     jobs:
-      - create_and_deploy_front_end
+      - create_and_deploy_frontend
       - get_last_deployment_id:
           requires:
-            - create_and_deploy_front_end
+            - create_and_deploy_frontend
       - promote_to_production:
           requires:
             - get_last_deployment_id
-      - clean_up_old_front_end:
+      - clean_up_old_frontend:
           requires:
             - promote_to_production
 
