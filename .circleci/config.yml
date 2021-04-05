@@ -40,8 +40,8 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - run: |
-          # curl "FAILED_URL"
-          curl http://${CIRCLE_WORKFLOW_ID:0:7}.s3-website-${AWS_DEFAULT_REGION}.amazonaws.com
+          curl "FAILED_URL"
+          # curl http://${CIRCLE_WORKFLOW_ID:0:7}.s3-website-${AWS_DEFAULT_REGION}.amazonaws.com
       - destroy_environment
           
   get_last_deployment_id:
