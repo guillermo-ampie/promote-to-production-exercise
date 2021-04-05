@@ -20,7 +20,7 @@ You need to setup the following CircleCI environment variables in order to [conf
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
 
-## Steps
+### Steps
 
 1.- Run: `build_first_deployment.sh`, this creates an Amazon S3 bucket and a [CloudFront](https://aws.amazon.com/cloudfront/) Distribution:
 
