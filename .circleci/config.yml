@@ -106,6 +106,3 @@ workflows:
       - cleanup_old_frontend:
           requires:
             - promote_to_production
-
-
-    
