@@ -1,6 +1,6 @@
 #!/bin/sh
 
-S3_BUCKET_NAME="sample-AA0001"
+S3_BUCKET_NAME="sample-aaa001"
 CLOUDFRONT_STACK_FILE="cloudfront.yml"
 CLOUDFRONT_STACK_NAME="cloudfront-dist"
 TAGS="promote=blue-green"
