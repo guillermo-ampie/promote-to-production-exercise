@@ -51,8 +51,7 @@ jobs:
       - attach_workspace:
           at: ~/project/tmp
       - run: |
-          # curl "FAILED_URL"
-          echo
+          curl "FAILED_URL"
       - destroy_environment
           
   get_last_deployment_id:
