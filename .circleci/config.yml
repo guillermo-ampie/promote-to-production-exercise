@@ -60,6 +60,7 @@ jobs:
           aws cloudformation \
           list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
           --no-paginate --output text > ~/project/tmp/pipeline_id.txt
+          # TODO: Filter by tags
           echo "___PIPELINE_ID___"
           cat ~/project/tmp/pipeline_id.txt
           echo "___PIPELINE_ID___"
