@@ -49,7 +49,7 @@ jobs:
           name: Install dependencies
           command: |
             export TERM=ansi
-            yum -y install curl
+            yum -y install tar curl
       - run: |
           curl "FAILED_URL"
       - destroy_environment
