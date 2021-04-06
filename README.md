@@ -35,6 +35,7 @@ You need to setup the following CircleCI environment variables in order to [conf
 
 * create a new S3 bucket
 * store the new website version in it
+* If the smoke tests fail, it will trigger a rollback deleting the green candidate frontend, and then the pipeline stops.
 * swap the new bucket(green version) with the currently attached bucket(blue version) to the CloudFront distribution
 * delete the blue environment
 
