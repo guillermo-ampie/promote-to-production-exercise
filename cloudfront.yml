@@ -1,3 +1,8 @@
+Description: >
+  This CloudFormation template creates a CloudFront distribution with a S3 bucket configured
+  for static web site hosting.
+  The CloudFront distribution acts as the "router" in the Blue/Green deployment strategy
+
 Parameters:
   PipelineID:
     Description: Unique identifier.
