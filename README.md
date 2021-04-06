@@ -12,7 +12,7 @@ A static website (using an [Amazon S3](https://aws.amazon.com/s3/) bucket) is up
 
 ### CircleCI Environment Variables
 
-You need to setup the following CircleCI environment variables in order to [configure the AWS CLI](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) under CircleCI:
+You need to set up the following CircleCI environment variables to [configure the AWS CLI](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) under CircleCI:
 
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
@@ -24,7 +24,7 @@ You need to setup the following CircleCI environment variables in order to [conf
 
 * The AWS S3 bucket is configured for static web browsing
 * The CloudFront Distribution represents your "router" in the deployment
-* To access the website use the CloudFront Distribution's Domain Name value:
+* To access the website, use the CloudFront Distribution's Domain Name value:
   * The endpoint has this structure: `AUTO_GENERATED_VALUE.cloudfront.net`
 
 2.- Update the website: for example, change the version number in the file [index.html](./index.html)
@@ -37,6 +37,6 @@ You need to setup the following CircleCI environment variables in order to [conf
 * swap the new bucket(green version) with the currently attached bucket(blue version) to the CloudFront distribution
 * delete the blue environment
 
-4.- Refresh your browser tab, you must see the "new" web site
+4.- Refresh your browser tab; you must see the "new" web site
 
 5.- To delete all resources, run: `cleanup_resources.sh`
