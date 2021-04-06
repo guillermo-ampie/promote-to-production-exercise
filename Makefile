@@ -3,3 +3,6 @@ build_first_deployment:
 
 validate_ci: # This expect a ./circleci/config.yml file
 	circleci config validate
+
+cleanup:
+	./cleanup_resources.sh
