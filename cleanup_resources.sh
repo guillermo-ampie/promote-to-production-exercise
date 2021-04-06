@@ -3,7 +3,7 @@
 PIPELINE_ID=$(aws cloudformation \
     list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
     --no-paginate --output text)
-CLOUDFRONT_STACK="production-distro"
+CLOUDFRONT_STACK="cloudfront-dist"
 
 echo "Deleting bucket: ${PIPELINE_ID}..."
 # Delete files in the S3 bucket
